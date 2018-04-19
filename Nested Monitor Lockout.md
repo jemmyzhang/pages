@@ -9,7 +9,20 @@
 * 一个用来避免[竞态条件](https://zh.wikipedia.org/wiki/竞态条件)的不变量。
 
 ### Java对管程的支持
-Java中提供了synchorinzed关键字来提供对管程的支持，通过对方法或者代码块加synchorinzedl来保证同一时间仅允许一个线程来调用代码块。
+Java中提供了`synchorinzed`关键字来提供对管程的支持，通过对方法或者代码块加`synchorinzed`来保证同一时间仅允许一个线程来调用代码块。
+
+```java
+public class Locker {
+    private Object monitorObject = new Object();
+    public void doSomething(){
+        synchronized (monitorObject){
+            //do something
+        }
+    }
+}
+```
+
+其中的`monitorObject`就是一个管程对象，进入`synchronized`代码块中的线程以互斥形式进行访问。
 
 ## 参考文献
 [https://zh.wikipedia.org/zh-cn/管程](https://zh.wikipedia.org/zh-cn/管程)
