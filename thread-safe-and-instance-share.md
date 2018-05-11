@@ -34,7 +34,9 @@ volatile关键字能保证内存可见性问题（改了其他线程马上能知
 
 ```
 volatile int count=0;
+
 ...
+
 void add(){
 counter++;
 }
