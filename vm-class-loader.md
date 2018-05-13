@@ -103,7 +103,10 @@ public static int value = 123;
 例外：如果类变量的字段属性表存在ConstantValue属性，则准备阶段就会初始化城ConstantValue指定的值，例如：
 
 ```java
-public static final int value =123;
+public static final int value = 123;
 ```
 
 该代码在准备阶段value即被赋值成了123。
+
+### 解析
+解析阶段的任务是将常量池里的**符号引用**替换为**直接引用**。
