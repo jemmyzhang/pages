@@ -160,7 +160,7 @@ else:
 
 if..elif..else对应if..else if..else的逻辑，下面示例：
 
-```
+```python
 age = 8
 if age >= 6 and age <18:
     print 'teenager'
@@ -175,7 +175,7 @@ else:
 ### for循环
 for循环采用`for .. in ...`这种语法，这里的`..`代表迭代的元素，`...`代表集合。  
 
-```
+```python
 for value in [1,2,3,4]:
     print value
 ```
@@ -183,7 +183,7 @@ for value in [1,2,3,4]:
 Q：如何一边迭代一边拿到迭代元素下标？  
 A：可以采用python标准函数库内建的enumerate函数。enumerate的语法是enumerate(sequence,start=0)，其中sequence是可迭代对象，可以使列表，字典，文件对象等。start是计数枚举的起始值。例如：
 
-```
+```python
 list=["Ted","Infi","Sky","Fly","Moon"]
 enum_obj=enumerate(list,0)
 for key,value in enum_obj:
@@ -200,7 +200,7 @@ for key,value in enum_obj:
 ### while循环
 语法 `while ...`,`...`是判断条件，例如：
 
-```
+```python
 N = 10
 x = 0
 while x < N:
@@ -222,7 +222,7 @@ while x < N:
 ### Dict的访问
 可以用`key`查找对应的value，与list很像。不同的是，list用的是下标索引，而dict用的是key。例如：
 
-```
+```python
 >>> print d['Adam']
 95
 ```
@@ -236,14 +236,14 @@ dict存储没有顺序，存储过程中key不可变，不能重复。例如list
 ### Dict更新
 更新可以基于key-value直接赋值。如果key已经存在，新的value会替换原有的value。
 
-```
+```python
 d['Paul'] = 72
 ```
 
 ### Dict迭代
 Dict可以用`for`循环对key进行迭代，例如：
 
-```
+```python
 >>> dict = { 'Tony': 100, 'Steve': 85, 'Bill': 59 }
 >>> for key in dict:
 ...     print key
@@ -252,10 +252,11 @@ Lisa
 Adam
 Bart
 ```
+
 ### 迭代Dict的value
 可以将dict转化成一个包含所有的list，这样就可以对dict的每一个value进行迭代：
 
-```
+```python
 dict = { 'Tony': 100, 'Steve': 85, 'Bill': 59 }
 for value in dict.values():
     print value
@@ -275,7 +276,7 @@ set包含`add`方法，可以通过`s.add(1)`语法来添加元素。如果是�
 ### Set元素访问
 由于Set是无序集合，所以不能通过索引来访问。我们可以用in来判断元素是否存在：
 
-```
+```python
 s = set(['a', 'b', 'c', 'd'])
 
 >>> 'a' in s
@@ -294,7 +295,7 @@ set元素也是没有顺序的。
 ### 定义函数
 定义函数使用`def`关键字，然后跟`：`，在缩进块中编写函数体。遇到return语句返回。
 
-```
+```python
 def my_abs(x):
     if x >= 0:
         return x
@@ -305,7 +306,7 @@ def my_abs(x):
 ### 返回值
 Python一个特点是**语法上**支持多返回值。在写法上支持多返回值，其实本质上返回值却是返回一个tuple，例如：  
 
-```
+```python
 def move(x,y):
     return x+100,y+200
 
@@ -323,14 +324,14 @@ print r
 ### 默认参数
 定义函数的时候，可以包含默认参数。语法例子如下：
 
-```
+```python
 def power(x, n=1):
     return x+n
 ```
 
 这样在传值的时候，可以只传一个参数：
 
-```
+```python
 power(2):
 # output: 3
 ```
@@ -340,7 +341,7 @@ power(2):
 ### Python可变参数
 如果想让函数能够接受任意参数，就可以定义可变参数。语法如下：
 
-```
+```python
 def function(*args):
     ...
 ```
@@ -362,7 +363,7 @@ Python提供了切片操作大大简化了集合和字符串等的操作。切�
 ### 字符串切片
 字符串也是可以进行切片操作的，结果仍然是字符串。这种截取字符串的操作很简单。
 
-```
+```python
 >>> 'ABCDEFG'[::2]
 'ACEG'
 ```
@@ -374,20 +375,20 @@ Python提供了切片操作大大简化了集合和字符串等的操作。切�
 对于有序集合，元素是有索引的，如果想到到索引，就需要使用` enumerate() `函数。  
 enumerate函数会将集合包装成一个tuple的集合。例如：
 
-```
+```python
 ['Adam', 'Lisa', 'Bart', 'Paul']
 ```
 
 变成了类似：
 
-```
+```python
 [(0, 'Adam'), (1, 'Lisa'), (2, 'Bart'), (3, 'Paul')]
 ```
 
 ### 迭代dict的value（两种方式对比）
 前文已经提到了一种方式，即我们可以将dict转化成一个包含所有的list，这样我们就可以对dict的每一个value进行迭代：
 
-```
+```python
 dict = { 'Tony': 100, 'Steve': 85, 'Bill': 59 }
 for value in dict.values():
     print value
@@ -395,7 +396,7 @@ for value in dict.values():
 
 第二种方式是使用dict的itervalues方法。
 
-```
+```python
 dict = { 'Tony': 100, 'Steve': 85, 'Bill': 59 }
 for value in dict.itervalues():
     print value
@@ -431,7 +432,7 @@ for key,value in dict.items():
 ### 生成列表
 我们可以借助range函数。例如：
 
-```
+```python
 range(1, 10)
 [1, 2, 3, 4, 5, 6, 7, 8, 9]
 ```
@@ -439,7 +440,7 @@ range(1, 10)
 如果要生成比较复杂的类型，使用range生成的语法就比较冗长，例如生成10以内平方数的列表集合：
 
 
-```
+```python
 l=[]
 for x in range(1, 10):
     l.append(x * x)
@@ -447,7 +448,7 @@ for x in range(1, 10):
 
 这时候我们可以借助**列表生成式**来实现上面的list：
 
-```
+```python
 [x * x for x in range(1, 10)]
 ```
 
@@ -456,7 +457,7 @@ for x in range(1, 10):
 ### 条件过滤
 如果我们在列表生成式中想加入条件过滤，可以在for循环后面加入if判断，例如：
 
-```
+```python
 [x * x for x in range(1, 10) if x % 2 ==0]
 # output: [4, 16, 36, 64]
 ```
