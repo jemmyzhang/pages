@@ -22,6 +22,7 @@
 
 ### Python中返回函数
 
+## 面向对象进阶
 
 ### \_\_new\_\_和\_\_init\_\_
 `__new__`方法会在类初始化的时候被调用，只能用于从object继承的新式类。按照Python官方文档的说法，`__new__`方法主要是当你继承一些不可变的class时(比如int, str, tuple)， 提供给你一个自定义这些类的实例化过程的途径。还有就是实现自定义的metaclass。
@@ -47,3 +48,10 @@ Python的包和模块有两种导入方式，精确导入和模糊导入。
 `__all__ = ["Pack1Class","Pack1Class1"]`代表导入语句能够导入`Pack1Class`和`Pack1Class1`这两个类。  
 所以`__init__.py`的另一个作用就是定义package的`__all__`来限制模糊导入的范围。
 3. 编写Python代码(不建议在__init__中写python模块，可以在包中在创建另外的模块来写，尽量保证__init__.py简单）
+
+
+## 三方库
+
+### Click
+
+> [https://blog.csdn.net/lihua_tan/article/details/54869355?utm_source=itdadao&utm_medium=referral](https://blog.csdn.net/lihua_tan/article/details/54869355?utm_source=itdadao&utm_medium=referral "https://blog.csdn.net/lihua_tan/article/details/54869355?utm_source=itdadao&utm_medium=referral")
