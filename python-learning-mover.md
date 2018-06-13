@@ -77,8 +77,10 @@ print obj1 is obj2
    from Root.Pack1 import Pack1Class
    import Root.Pack1.Pack1Class
    ```
-   模糊导入的语法，例如：  
-   `from package1 import *`  
+   模糊导入的语法，例如：
+   ```python
+   from package1 import *
+   ```
    里面的`*`就是由`__all__`来定义。  
    例如：  
    `__all__ = ["Pack1Class","Pack1Class1"]`代表导入语句能够导入`Pack1Class`和`Pack1Class1`这两个类。  
