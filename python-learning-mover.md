@@ -73,8 +73,10 @@ print obj1 is obj2
 2. 可以用来定义`__all__`来支持模糊倒入。  
    Python的包和模块有两种导入方式，精确导入和模糊导入。  
    精确导入的语法如下：  
-   `from Root.Pack1 import Pack1Class`  
-   `import Root.Pack1.Pack1Class`  
+   ```python
+   from Root.Pack1 import Pack1Class
+   import Root.Pack1.Pack1Class
+   ```
    模糊导入的语法，例如：  
    `from package1 import *`  
    里面的`*`就是由`__all__`来定义。  
