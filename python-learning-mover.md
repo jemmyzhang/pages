@@ -71,16 +71,16 @@ print obj1 is obj2
 #### Python包中\_\_init\_\_.py的作用
 1. 作为package的标识。
 2. 可以用来定义`__all__`来支持模糊倒入。  
-Python的包和模块有两种导入方式，精确导入和模糊导入。  
-精确导入的语法如下：
-`from Root.Pack1 import Pack1Class`  
-`import Root.Pack1.Pack1Class`  
-模糊导入的语法，例如：  
-`from package1 import *`  
-里面的`*`就是由`__all__`来定义。  
-例如：  
-`__all__ = ["Pack1Class","Pack1Class1"]`代表导入语句能够导入`Pack1Class`和`Pack1Class1`这两个类。  
-所以`__init__.py`的另一个作用就是定义package的`__all__`来限制模糊导入的范围。
+   Python的包和模块有两种导入方式，精确导入和模糊导入。  
+   精确导入的语法如下：
+   `from Root.Pack1 import Pack1Class`  
+   `import Root.Pack1.Pack1Class`  
+   模糊导入的语法，例如：  
+   `from package1 import *`  
+   里面的`*`就是由`__all__`来定义。  
+   例如：  
+   `__all__ = ["Pack1Class","Pack1Class1"]`代表导入语句能够导入`Pack1Class`和`Pack1Class1`这两个类。  
+   所以`__init__.py`的另一个作用就是定义package的`__all__`来限制模糊导入的范围。
 3. 编写Python代码(不建议在__init__中写python模块，可以在包中在创建另外的模块来写，尽量保证__init__.py简单）
 
 ### 上下文管理器\_\_enter\_\_和\_\_exit\_\_
