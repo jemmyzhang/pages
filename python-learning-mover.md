@@ -52,7 +52,7 @@
    i = PositiveInteger(-3)
    print i
    ```
-
+   
 从执行顺序上说，在`__init__`不是实例化一个类的时候第一个被调用的方法。`__new__`会在`__init__`之前被调用。
 
 #### 用__new__来实现单例
@@ -75,15 +75,19 @@ print obj1 is obj2
 1. 作为package的标识。
 2. 可以用来定义`__all__`来支持模糊倒入。  
    Python的包和模块有两种导入方式，精确导入和模糊导入。  
-   精确导入的语法如下：  
+   精确导入的语法如下：
+    
    ```python
    from Root.Pack1 import Pack1Class
    import Root.Pack1.Pack1Class
    ```
+   
    模糊导入的语法，例如：
+   
    ```python
    from package1 import *
    ```
+   
    里面的`*`就是由`__all__`来定义。  
    例如：  
    `__all__ = ["Pack1Class","Pack1Class1"]`代表导入语句能够导入`Pack1Class`和`Pack1Class1`这两个类。  
