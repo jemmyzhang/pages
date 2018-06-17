@@ -32,6 +32,7 @@
 1. `__init__` 通常用于初始化一个新实例，控制这个初始化的过程，比如添加一些属性， 做一些额外的操作，发生在类实例被创建完以后。它是实例级别的方法。
 2. `__new__`通常用于控制生成一个新实例的过程。它是类级别的方法。
 3. 按照官方文档，__new__方法主要是当你继承一些不可变的class时(比如int, str, tuple)， 提供给你一个自定义这些类的实例化过程的途径。还有就是实现自定义的metaclass。例如：
+   
    ```python
    class PositiveInteger(int):
      def __init__(self, value):
@@ -40,7 +41,9 @@
    i = PositiveInteger(-3)
    print i
    ```
+   
    运行后发现不是我们想要的结果，我们仍然得到了-3。 这是由于int是不可变的对象，我们只有重载`__new__`方法之后才能起到自定义的作用。修改后的代码如下：
+   
    ```python
    class PositiveInteger(int):
        def __new__(cls, value):
