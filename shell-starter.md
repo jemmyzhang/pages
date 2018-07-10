@@ -115,3 +115,149 @@ echo ${string:1:4} # 输出 unoo
 string="runoob is a great company"
 echo `expr index "$string" is`  # 输出 8
 ```
+
+## 流程控制
+流程控制主要分为条件控制和循环控制。
+### 条件控制
+#### if
+语法格式：
+```shell
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN 
+fi
+```
+
+条件控制可以写到一行：
+```shell
+if [ $(ps -ef | grep -c "ssh") -gt 1 ]; then echo "true"; fi
+```
+
+#### if else
+语法格式：
+```shell
+if condition
+then
+    command1 
+    command2
+    ...
+    commandN
+else
+    command
+fi
+```
+
+#### if else-if else
+语法格式：
+```shell
+if condition1
+then
+    command1
+elif condition2 
+then 
+    command2
+else
+    commandN
+fi
+```
+
+#### case
+Shell case语句为多选择语句。可以用case语句匹配一个值与一个模式，如果匹配成功，执行相匹配的命令。语句格式如下：
+```shell
+case 值 in
+模式1)
+    command1
+    command2
+    ...
+    commandN
+    ;;
+模式2）
+    command1
+    command2
+    ...
+    commandN
+    ;;
+esac
+```
+
+例如：
+```shell
+echo '输入 1 到 4 之间的数字:'
+echo '你输入的数字为:'
+read aNum
+case $aNum in
+    1)  echo '你选择了 1'
+    ;;
+    2)  echo '你选择了 2'
+    ;;
+    3)  echo '你选择了 3'
+    ;;
+    4)  echo '你选择了 4'
+    ;;
+    *)  echo '你没有输入 1 到 4 之间的数字'
+    ;;
+esac
+```
+
+### 循环控制
+#### for循环
+语法格式：
+```shell
+for var in item1 item2 ... itemN
+do
+    command1
+    command2
+    ...
+    commandN
+done
+```
+
+不同item之间用空格隔开。如果写成一行就是：
+```shell
+for var in item1 item2 ... itemN; do command1; command2… done;
+```
+
+#### while循环
+语法格式为：
+```shell
+while condition
+do
+    command
+done
+```
+
+#### 无限循环
+语法格式为：
+```shell
+while :
+do
+    command
+done
+```
+
+或者
+```shell
+while true
+do
+    command
+done
+```
+
+或者
+```shell
+for (( ; ; ))
+```
+
+#### until循环
+until循环和while循环处理逻辑正好相反，一直执行指令直到condition为True时停止。  
+语法格式：
+```shell
+until condition
+do
+    command
+done
+```
+
