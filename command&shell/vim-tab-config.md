@@ -52,3 +52,7 @@ set list listchars=tab:>-
 autocmd FileType * set ts=2 | set noexpandtab
 autocmd FileType python set ts=4 | set expandtab
 ```
+
+## 参考文献
+> [http://www.cnblogs.com/panliang188/archive/2010/04/20/1715836.html](http://www.cnblogs.com/panliang188/archive/2010/04/20/1715836.html)
+> [https://blog.csdn.net/jiang1013nan/article/details/6298727](https://blog.csdn.net/jiang1013nan/article/details/6298727)
