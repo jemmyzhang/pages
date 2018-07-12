@@ -41,7 +41,7 @@ set expandtab
 :retab!
 ```
 
-### 将 tab 显示为可见字符
+### 将Tab显示为可见字符
 ```shell
 set list listchars=tab:>-
 ```
