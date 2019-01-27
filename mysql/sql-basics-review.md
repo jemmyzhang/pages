@@ -28,3 +28,25 @@ Like是一个谓词，可以结合通配符进行模糊匹配。常见的通配�
 ```sql
 select concat(name,'(',email,')') from user;
 ```
+
+## CASE表达式
+### 基本用法：
+简单表达式：
+```sql
+CASE column：
+  WHEN condition1 THEN value1
+  WHEN condition2 THEN value2
+ELSE
+  value3
+END
+```
+
+搜索表达式：
+```sql
+CASE 
+  WHEN column=condition1 THEN value1
+  WHEN column=condition2 THEN value2
+ELSE
+  value3
+END
+```
