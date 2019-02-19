@@ -1,0 +1,2 @@
+# Spring中的Aware接口
+Spring中包含了一个Aware接口，看Aware字面上的意思是感知的意思。意思是派生类能够通过派生自Aware接口，让派生类感知到Spring容器里包含的内容。
