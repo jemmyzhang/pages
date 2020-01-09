@@ -3,26 +3,26 @@
 ## 问题描述
 公司的业务中使用了GPRC作为跨平台的RPC框架，分为S端和C端。S端由服务平台提供，而C端则是安装在终端的。我们由于业务需要，我们为S端和C端分别构建了简单PRC通道以及双向流，以满足S端可以实现主动推流的需求。近期在排查日志发现，服务端的双向流通道日志里存在大量连接断开的情况。具体的错误是StatusRuntimeException： CANCELLED: cancelled before receiving half close。 这个错误意味着我们的通道是不可靠的，虽然客户端有重连机制，但是在这个断开的短暂时间里，业务会发生中断，影响很大。
 
-![截图1](grpc-connection-close/grpc-image1.png)
+![截图1](grpc-image1.png)
 
 ## 问题排查
 由于日志里能看到异常堆栈，所以排查的时候，我们先尝试从堆栈异常入手。但随后我们发现是有一个异步线程执行的，这个错误的大意是在还未执行onHalfClose的流程时，先执行了onCancel方法，最后导致双向流异常退出。查阅Java Doc后发现，到执行onCancel方法时，服务器会努力中断与处理客户端的消息以节约资源。这个cancel操作可以被超时，网络，客户端或是客户端主动执行取消操作所触发。
 
-![截图2](grpc-connection-close/grpc-image2.png)
+![截图2](grpc-image2.png)
 
 但是排查到这里线索就断了。这个错误看起来只是一个某个异常带来的连带后果，真正的错误可能是某个上述中的操作。在这个异常中，既无法看出错误的根源，也没有描述具体是哪个连接发生异常。如何找出错误的真正原因呢？因此为何了错误和具体通信的双方联系在一起，我们在代码中做了一些细微的调整以输出更详细的日志：
 
 1. 首先我们将日志级别调低，调至Trace级别，这样Netty会追踪打印每个链路的发包/收包情况。
 2. 在GRPC双向流的onError逻辑中加入如下代码，使用反射获取发生异常时，流通道绑定的Channel信息。
-![截图3](grpc-connection-close/grpc-image3.png)
+![截图3](grpc-image3.png)
 
 完整的日志就如同下图所示。可以看到，Netty打印出来的日志中，Client的IP地址和我们日志中通过发射的到Channel的IP地址是一一对应起来的，也就是说，就是10.125.8.16~10.125.111.43这条连接出现了故障。而在打印我们自定义的错误之前，Netty曾Sent了几条看起来有点异常的消息，PING，GOAWAY，并且包含了errorCode。发送了这几个消息以后，同一个线程随后触发了onConnectionError逻辑。由于GRPC基于HTTP2协议进行通信，而HTTP2中的GOAWAY帧又是用于启动连接关闭或发出验证错误状态信号，简单说，意思是让对端走开。看来这是一个比较大的怀疑点。此时看一下Netty的源码可能能够帮助我们更快找到错误根源。
 
-![截图4](grpc-connection-close/grpc-image4.png)
+![截图4](grpc-image4.png)
 
 由于GRPC中包含的Netty组件不包含源码，我们无法将错误行号对应到具体的代码上。因此我们从Github上下载了grpc-java项目工程，里面包含了grpc-netty-shaded的源码。我们定位到了发送GOAWAY的日志所在。
 
-![截图5](grpc-connection-close/grpc-image5.png)
+![截图5](grpc-image5.png)
 
 ```java
 private static void processGoAwayWriteResult(final ChannelHandlerContext ctx, final int lastStreamId,
