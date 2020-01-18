@@ -1,0 +1,5 @@
+### ServerBootstrap
+这个类是AbstractBootstrap的子类，可以理解是构造一个服务端。主要的作用是启动一个服务监听；并通过生成子Channel，接受并建立和客户端的连接。同为子类的还有Bootstrap。很多共性的动作，都放在了AbstractBootstrap中，也符合模板方法的一贯写法。这个类主要做了几个事情：
+1. 包含了一堆子Channel的选项（Options），属性（attributes），线程组（EventLoopGroup）等属性。这些属性可以在构造ServerBootstrap的时候进行填充，后续生成的子Channel，就能拥有我们的配置和属性。
+2. 重写了init函数。init函数是定义在AbstractBootstrap的抽象方法，这也意味着ServerBootstrap和普通的Bootstrap，初始化过程是不同的。Server的初始化过程，无非是将初始化时候将子Channel的参数添加到一个名为ServerBootstrapAcceptor的Handler里，并将这个Handler加入到Pipeline。ServerBootstrapAcceptor的作用，主要是用来注册子channel的。而子channel，使用来真正承载数据交换的。
+因此ServerBootstrap做的事情，主要就是两点：1、添加参数（ServerSocketChannel和SocketChannel都可以添加）。2、注册子Channel。
